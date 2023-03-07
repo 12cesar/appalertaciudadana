@@ -74,7 +74,7 @@ const AlertasScreen = ({ navigation }: Props) => {
   });
   if (!carga) {
     return (
-      <LoadingScreen />
+      <LoadingScreen title='Cargando Datos' descripcion='Por favor espere .....' />
     )
   }
   if (first?.length === 0) {

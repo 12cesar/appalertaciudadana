@@ -17,6 +17,7 @@ import useAlertFloating from '../hooks/useAlertFloating';
 import { alertFloatingStyle } from '../styles/AlertFloatingStyle';
 import ModalComponent from './ModalComponent';
 import { TouchableOpacity } from 'react-native';
+import socket from '../socket/socketApi';
 interface Props {
     style: StyleProp<ViewStyle>;
 }
@@ -45,6 +46,9 @@ const AlertFloatingComponent = ({ style }: Props) => {
     const cerrarModal =()=>{
         setModalVisible(false);
     }
+    socket.on('actualizar-tipo-alerta',resp=>{
+        mostrarTipoAlertas();        
+    });
     const mostrarTouchable = () => {
         let alineacion = 5;
         if (!carga) {
@@ -73,7 +77,7 @@ const AlertFloatingComponent = ({ style }: Props) => {
                             ]}>
                             <Image
                                 source={{
-                                    uri: `${baseURL}/tipoalerta/mostrar/imagen/ver/${data.id}`,
+                                    uri: `${baseURL}/uploadgeneral/tipo-alerta/${data.img}/${data.id}`,
                                 }}
                                 style={alertFloatingStyle.iconoAlert}
                             />
