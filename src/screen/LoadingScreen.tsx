@@ -3,7 +3,12 @@ import { View, Text, Image } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import { useTheme } from '@react-navigation/native';
 
-export const LoadingScreen = () => {
+interface Props{
+    title:string,
+    descripcion:string
+}
+
+export const LoadingScreen = ({title,descripcion}:Props) => {
     const colors = useTheme();
     return (
         <View
@@ -28,7 +33,7 @@ export const LoadingScreen = () => {
                 fontWeight:'bold',
                 fontSize:20,
                 marginBottom:20
-            }}>Cargando Datos</Text>
+            }}>{title}</Text>
             
             <ActivityIndicator
                 size={50}
@@ -39,7 +44,7 @@ export const LoadingScreen = () => {
                 fontWeight:'bold',
                 marginTop:20,
                 fontSize:15
-            }}>Por favor espere .......</Text>
+            }}>{descripcion}</Text>
         </View>
     )
 }

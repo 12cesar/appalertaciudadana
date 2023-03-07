@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ScrollView, StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -6,6 +6,7 @@ import { useForm } from '../hooks/useForm';
 import alertaApi from '../api/apiAlerta';
 import { ResultValidarSunat } from '../interfaces/validarSunatInterface';
 import { useTheme } from '@react-navigation/native';
+import { LoadingScreen } from './LoadingScreen';
 
 interface Props extends StackScreenProps<any, any> { };
 
@@ -15,23 +16,24 @@ const ValidarDniScreen = ({ navigation }: Props) => {
   const { dni, form, onChange } = useForm({
     dni: ''
   });
+  const [carga, setCarga] = useState<boolean>(false);
   const { colors } = useTheme();
   const validarSunat = async() => {
     try {
+    setCarga(true);
     const {data}= await alertaApi.post<ResultValidarSunat>('/validarsunat',{dni});
-    console.log(data);
+    setCarga(false)
     navigation.navigate('Register',{nombre:data.datos.nombre, apellido:data.datos.apellido, dni:data.datos.dni});
     } catch (error) {
+      setCarga(false)
       Alert.alert('Mensaje', 'Porfavor ingrese un DNI valido');
-      
     }
   }
-
+  if(carga) return <LoadingScreen title='Validando Datos' descripcion='Por favor espere ......'/>
   return (
     <ScrollView style={StylesLogin.container}>
       <TouchableOpacity
         style={{
-          position:'absolute',
           marginTop:20,
         }}
         onPress={()=>{navigation.pop()}}

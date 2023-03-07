@@ -47,7 +47,7 @@ const LoginScreen = ({ navigation }: Props) => {
           <Image style={StylesLogin.logo} source={require('../assets/img/login/logo-login1.jpeg')} />
           <Text style={StylesLogin.textTitle}>Alerta Ciudadana</Text>
         </View>
-        <View style={StylesLogin.containerLogin}>
+        {/* <View style={StylesLogin.containerLogin}>
 
           <TouchableOpacity
             activeOpacity={0.9}
@@ -65,7 +65,7 @@ const LoginScreen = ({ navigation }: Props) => {
 
             </View>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         <View>
           <Text style={StylesLogin.loginText}>Iniciar Sesion</Text>

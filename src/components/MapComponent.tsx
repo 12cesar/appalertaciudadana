@@ -50,7 +50,7 @@ const MapComponent = ({ markers }: Props) => {
 
 
     if (!hasLocation) {
-        return <LoadingScreen />
+        return <LoadingScreen title='Cargando Ubicacion' descripcion='Por favor espere ......'/>
     }
     return (
         <>
@@ -103,14 +103,14 @@ const MapComponent = ({ markers }: Props) => {
                 style={{
                     position: 'absolute',
                     bottom: 32,
-                    left: 20
+                    left: 20,
                 }}
             />
             <AlertFloatingComponent
                 style={{
                     position: 'absolute',
-                    bottom: 30,
-                    right: 20
+                    bottom: 1,
+                    right: 0
                 }}
             />
         </>

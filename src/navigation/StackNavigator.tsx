@@ -31,7 +31,7 @@ const StackNavigator = () => {
 
   const {status, permissions}= useContext(AuthContext);
 
-  if (status=== 'checking') return <LoadingScreen/>
+  if (status=== 'checking') return <LoadingScreen title='Cargando Datos' descripcion='Por favor espere ......'/>
 
   return (
     <Stack.Navigator

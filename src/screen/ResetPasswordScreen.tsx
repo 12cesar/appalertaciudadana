@@ -1,10 +1,11 @@
+import React, {useState} from 'react'
 import { useTheme } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
-import React from 'react'
 import { Alert, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import alertaApi from '../api/apiAlerta';
 import { useForm } from '../hooks/useForm';
+import { LoadingScreen } from './LoadingScreen';
 
 interface Props extends StackScreenProps<any, any> { };
 const ResetPasswordScreen = ({navigation}:Props) => {
@@ -12,25 +13,27 @@ const ResetPasswordScreen = ({navigation}:Props) => {
   const { correo, form, onChange } = useForm({
     correo: ''
   });
-
+  const [carga, setCarga] = useState<boolean>(false);
   const resetPassword =async()=>{
     try {
       //console.log(correo);
+      setCarga(true);
       const resp = await alertaApi.post('/enviarmensaje',{correo});
-      Alert.alert('Mensaje', resp.data.msg);
-      console.log(resp.data);
+      
+      Alert.alert('Mensaje', resp.data.msg)
+      setCarga(false);
     } catch (error:any) {
+      setCarga(false);
       Alert.alert('Mensaje', 'Porfavor verifique su correo electronico o su conexion a internet');
       
     }
     
   }
-
+  if (carga) return <LoadingScreen title='Enviando alerta ciudadana' descripcion='Por favor espere ......'/>
   return (
     <ScrollView style={StylesLogin.container}>
       <TouchableOpacity
         style={{
-          position:'absolute',
           marginTop:20,
         }}
         onPress={()=>{navigation.popToTop()}}
@@ -46,7 +49,7 @@ const ResetPasswordScreen = ({navigation}:Props) => {
         <Image style={StylesLogin.logo} source={require('../assets/img/login/logo-login1.jpeg')} />
         <Text style={StylesLogin.textTitle}>Alerta Ciudadana</Text>
       </View>
-      <View style={StylesLogin.containerLogin}>
+      {/* <View style={StylesLogin.containerLogin}>
         <TouchableOpacity
           activeOpacity={0.9}
         >
@@ -63,7 +66,7 @@ const ResetPasswordScreen = ({navigation}:Props) => {
             <Text style={StylesLogin.socialText}>Google</Text>
           </View>
         </TouchableOpacity>
-      </View>
+      </View> */}
       <View>
         <Text style={StylesLogin.loginText}>Ingrese su correo, para enviar mensaje de cambio de contraseña</Text>
         <View >

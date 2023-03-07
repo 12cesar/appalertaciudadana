@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 
 import { StackScreenProps } from '@react-navigation/stack';
 import { ScrollView, StyleSheet, Text, TextInput, View, Image, TouchableOpacity,Alert } from 'react-native'
@@ -6,14 +6,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useForm } from '../hooks/useForm';
 import { RootStackParams } from '../navigation/StackNavigator';
 import AuthContext from '../context/AuthContext';
-import { useContext } from 'react';
 import { useTheme } from '@react-navigation/native';
+import { LoadingScreen } from './LoadingScreen';
 
 interface Props extends StackScreenProps<RootStackParams, 'Register'> {};
 
 const RegisterScreen = ({ navigation, route }: Props) => {
 
   const { signUp, errorMessage, removeError } = useContext(AuthContext);
+  const [carga, setCarga] = useState<boolean>(false);
   const { colors } = useTheme();
   const { dni, nombre, apellido, password, form, onChange } = useForm({
     dni: route.params.dni,
@@ -25,25 +26,27 @@ const RegisterScreen = ({ navigation, route }: Props) => {
 
 
   const registrarCiudadano = async () => {
-    try {
+    setCarga(true);
+     try {      
       if (password === '') {
-        Alert.alert('Mensaje', 'Por favor ingrese una contraseña')
+        Alert.alert('Mensaje', 'Por favor ingrese una contraseña');
+        setCarga(false)
       }else{
         signUp({nombre, apellido, dni, password});
+        setCarga(false)
       }
       
     } catch (error) {
+      
       console.log(error);
-    }
-
+    } 
   }
-
+  if(carga) return <LoadingScreen title='Registrando sus datos' descripcion='Por favor espere ......'/>
   return (
     <ScrollView style={StylesLogin.container}>
       <TouchableOpacity
         style={{
-          position:'absolute',
-          marginTop:20,
+          marginTop:20
         }}
         onPress={()=>{navigation.pop()}}
       >

@@ -129,9 +129,10 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
     },
     title: {
-        fontSize: 16,
+        fontSize: 13,
         marginTop: 3,
         fontWeight: 'bold',
+        color:'black'
     },
     caption: {
         fontSize: 14,

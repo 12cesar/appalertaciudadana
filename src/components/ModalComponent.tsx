@@ -5,7 +5,7 @@ import { modalStyle } from '../styles/ModalStyle';
 import useModalCompent from '../hooks/useModalCompent';
 import { useForm } from '../hooks/useForm';
 import { CrearAlert } from '../interfaces/crearAlerta.interface';
-import LoadingScreen2 from '../screen/LoadingScreen2';
+import { LoadingScreen } from '../screen/LoadingScreen';
 interface Props {
     onPress: () => void
     typeAlert: {
@@ -40,7 +40,7 @@ const ModalComponent = ({ onPress, typeAlert }: Props) => {
         }
         
     }
-    if (carga) return <LoadingScreen2/>
+    if (carga) return <LoadingScreen title='Enviando alerta ciudadana' descripcion='Por favor espere ......'/>
     return (
         <View style={modalStyle.centeredView}>
             <View style={modalStyle.modalViewUno}>

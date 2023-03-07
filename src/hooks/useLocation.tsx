@@ -36,7 +36,7 @@ const useLocation = () => {
                             setinitialPosition(location);
                             sethasLocation(true)
                         });
-                    console.log('estoy alerady enabled');
+                    console.log('estoy enabled');
     
                 } else {
                     console.log(data);
@@ -47,29 +47,39 @@ const useLocation = () => {
         } catch (error) {
             
         }
+    }, []);
+    useEffect(() => {
+        
     }, [])
+    
 
     useEffect(() => {
         getCurrentLocation()
             .then(location => {
+                console.log(location);
                 setinitialPosition(location);
                 sethasLocation(true)
             });
     }, []);
 
     const getCurrentLocation = (): Promise<Location> => {
+        //Geolocation.getCurrentPosition(info => console.log(info));
         return new Promise((resolve, reject) => {
+                     
+            
             Geolocation.getCurrentPosition(
-                ({ coords }) => {
+                (resp) => {
+                    console.log('como estas');
+                    
+                    console.log(resp.coords);
+                
                     resolve({
-                        latitude: coords.latitude,
-                        longitude: coords.longitude
+                        latitude: resp.coords.latitude,
+                        longitude: resp.coords.longitude
                     });
                 },
                 (err) => reject({ err }),
-                {
-                    enableHighAccuracy: true
-                }
+                
 
             );
         })

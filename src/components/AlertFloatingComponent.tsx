@@ -9,12 +9,14 @@ import {
     Image,
     Modal,
     Alert,
+    StyleSheet
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { baseURL } from '../api/apiAlerta';
 import useAlertFloating from '../hooks/useAlertFloating';
 import { alertFloatingStyle } from '../styles/AlertFloatingStyle';
 import ModalComponent from './ModalComponent';
+import { TouchableOpacity } from 'react-native';
 interface Props {
     style: StyleProp<ViewStyle>;
 }
@@ -100,7 +102,7 @@ const AlertFloatingComponent = ({ style }: Props) => {
     }
 
     return (
-        <View style={{ ...(style as any), alignItems: 'center' }}>
+        <View style={{ ...(style as any), alignItems: 'center',padding:30}}>
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -118,11 +120,11 @@ const AlertFloatingComponent = ({ style }: Props) => {
 
             {mostrarTouchable()}
 
-            <TouchableWithoutFeedback onPress={toggleMenu}>
+            <TouchableOpacity onPress={toggleMenu} style={styles.blackButton} activeOpacity={0.8}>
                 <Animated.View style={[alertFloatingStyle.buttonPrimary, rotation]}>
                     <Icon name="add-sharp" size={24} color="#fff" />
                 </Animated.View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -130,3 +132,22 @@ const AlertFloatingComponent = ({ style }: Props) => {
 export default AlertFloatingComponent;
 
 
+const styles = StyleSheet.create({
+    blackButton:{
+        zIndex:999,
+        height:50,
+        width:50,
+        backgroundColor:'#05923d',
+        borderRadius:100,
+        justifyContent:'center',
+        alignItems:'center',
+        shadowColor:'#000',
+        shadowOffset:{
+            width:0,
+            height:3
+        },
+        shadowOpacity:0.27,
+        shadowRadius:4.65,
+        elevation:6
+    }
+});
