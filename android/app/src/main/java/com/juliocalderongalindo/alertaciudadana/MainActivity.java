@@ -1,4 +1,5 @@
-package com.alertaciudadana;
+//package com.alertaciudadana;
+package com.juliocalderongalindo.alertaciudadana;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

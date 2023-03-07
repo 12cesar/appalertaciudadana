@@ -97,9 +97,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.alertaciudadana"
+    namespace "com.juliocalderongalindo.alertaciudadana"
     defaultConfig {
-        applicationId "com.alertaciudadana"
+        applicationId "com.juliocalderongalindo.alertaciudadana"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
