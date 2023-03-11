@@ -102,15 +102,15 @@ const MapComponent = ({ markers }: Props) => {
                 onPress={centerPosition}
                 style={{
                     position: 'absolute',
-                    bottom: 32,
-                    left: 20,
+                    bottom: -20,
+                    left: -20,
                 }}
             />
             <AlertFloatingComponent
                 style={{
                     position: 'absolute',
-                    bottom: 1,
-                    right: 0
+                    bottom: -20,
+                    right: -20
                 }}
             />
         </>

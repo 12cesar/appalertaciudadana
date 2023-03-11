@@ -106,7 +106,7 @@ const AlertFloatingComponent = ({ style }: Props) => {
     }
 
     return (
-        <View style={{ ...(style as any), alignItems: 'center',padding:30}}>
+        <View style={{ ...(style as any), alignItems: 'center',padding:50}}>
             <Modal
                 animationType="slide"
                 transparent={true}

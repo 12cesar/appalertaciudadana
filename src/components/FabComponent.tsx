@@ -14,7 +14,7 @@ interface Props{
 const FabComponent = ({iconName,onPress,style={}}:Props) => {
   return (
     <View
-        style={{...style as any}}
+        style={{...style as any, padding:50}}
     >
         <TouchableOpacity
             activeOpacity={0.8}
